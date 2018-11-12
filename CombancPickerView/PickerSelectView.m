@@ -40,7 +40,6 @@
 //UI布局，主要就是在弹出视图上添加选择器
 - (void)initUI {
     [super initUI];
-    
     self.titleLabel.text = _title;
     [self.alertView addSubview:self.picker];
 }
@@ -50,7 +49,10 @@
     if (!_selectValueArray) {
         _selectValueArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < _infoArray.count; i++) {
+            NSLog(@"--%lu",(unsigned long)[_infoArray[i] count]);
+            if ([_infoArray[i] count] == 0) continue;
             [_selectValueArray addObject:_infoArray[i][0]];
+            NSLog(@"---%@",_infoArray[i][0]);
         }
     }
     return _selectValueArray;
@@ -100,7 +102,7 @@
 
 //返回宽度
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 100.0f;
+    return SCREEN_WIDTH/self.infoArray.count;
 }
 
 #pragma mark - 背景视图的点击事件
